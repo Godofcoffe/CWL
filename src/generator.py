@@ -1,17 +1,18 @@
 from random import randint, choice
+from operator import mul
 from src.interface.menu import color_text
 from time import sleep
 
 
 def factorial(num: int):
-    tot = 1
-    for n in range(1, num + 1):
-        tot *= n
-    return tot
+        tot = 1
+        for n in range(1, num + 1):
+            tot *= n
+        return tot
 
-
-def combine(n: int, p: int):
-    return int(factorial(n) / (factorial(p) * factorial(n - p)))
+def permutation(n: int, p: int):
+    all_characters = 71
+    return int(factorial(n)/ factorial(all_characters**p))
 
 
 def rand(word=None, symbols=False, only_numbers=False, numbers=False, uppers=False, position=False, limit=8):
@@ -29,7 +30,7 @@ Generates a random password of 8 or more characters between letters and numbers.
     result: str = ''
     letters = (
         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-        'u', 'v', 'x', 'y', 'z'
+        'u', 'v', 'w', 'x', 'y', 'z'
     )
     # geração de números
     if only_numbers:
@@ -105,7 +106,7 @@ def main(archive: str, **kwargs):
     if word is not None:
         rest = ''
         lenght = len(word)
-        for c in range(0, limit - lenght + 1):
+        for _ in range(0, limit - lenght + 1):
             rest += str(randint(0, 9))
         res_combine = factorial(len(rest))
 
