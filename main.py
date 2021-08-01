@@ -6,7 +6,7 @@ from src.interface.menu import color_text, main_menu
 from requests import get
 from re import findall
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
 
 def choose(valid):
