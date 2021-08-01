@@ -106,18 +106,16 @@ def main(archive: str, **kwargs):
     sleep(3)
     with open(archive, "w+") as file:
         while n_possibilites > 0:
-            for out in generate(kwargs) if kwargs else generate():
-                possibilities[out] = 0
-                if possibilities[out] > 1:
-                    try:
-                        print(color_text("red", out))
-                    except KeyboardInterrupt:
-                        print("Script stopped by user.")
-                else:
-                    possibilities[out] += 1
-                    n_possibilites -= 1
-                    file.write(out)
-                    try:
-                        print(color_text("white", out))
-                    except KeyboardInterrupt:
-                        print("Script stopped by user.")
+            try:
+                for out in generate(kwargs.items()) if kwargs else generate():
+                    possibilities[out] = 1
+                    if possibilities[out] > 1:
+                        print("\033[K", color_text("red", out), end="\r")
+                    else:
+                        possibilities[out] += 1
+                        n_possibilites -= 1
+                        file.write(out)
+                        print("\033[K", color_text("white", out), end="\r")
+                            
+            except KeyboardInterrupt:
+                print("Script stopped by user.")
