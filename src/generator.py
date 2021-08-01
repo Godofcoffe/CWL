@@ -4,26 +4,37 @@ from time import sleep
 
 
 def factorial(num: int):
-        tot = 1
-        for n in range(1, num + 1):
-            tot *= n
-        return tot
+    """
+        Calculates the factorial of a number.
+
+        :param num: Number
+    """
+    tot = 1
+    for n in range(1, num + 1):
+        tot *= n
+    return tot
 
 def combination(p: int):
+    """
+        Do a cobinatorial analysis using the Combination.
+
+        :param p: number of elements that are repeated
+    """
     all_characteres = 71
     return int(factorial(all_characteres)/ factorial(p) * factorial(all_characteres - p))
 
 
 def generate(word=None, symbols=False, only_numbers=False, numbers=False, uppers=False, position=False, limit=8):
     """
-Generates a random password of 8 or more characters between letters and numbers.
-    name = word you want to add to the generator:
+    Generates a random password of 8 or more characters between letters and numbers.
+
+    :param word: word you want to add to the generator.
     if a word is added, only random numbers will be generated that will fill the space to the limit.
-    max = maximum number that will be generated.
-    simb = chooses whether to add symbols.
-    num = choose whether there will be only numbers.
-    cap = choose if there will be capital letters.
-    pos = Changes the position of the name parameter.
+    :param max: maximum number that will be generated.
+    :param simb: chooses whether to add symbols.
+    :param only_numbers: choose whether there will be only numbers.
+    :param cap: choose if there will be capital letters.
+    :param pos: Changes the position of the name parameter.
 """
 
     letters = (
@@ -76,7 +87,9 @@ Generates a random password of 8 or more characters between letters and numbers.
 
 
 def main(archive: str, **kwargs):
-    print(kwargs)
+    """
+        Main function.
+    """
     limit = kwargs.get("limit")
     word = kwargs.get("word")
     if limit is None:

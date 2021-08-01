@@ -1,8 +1,9 @@
 def color_text(c: str, txt):
     """
-To edit the text color:
-c = color
-txt = text
+        To edit the text color.
+
+        :param c: color.
+        :param txt: text
     """
     if c == 'red':
         return '\033[91m{}\033[m'.format(txt)
@@ -22,16 +23,18 @@ txt = text
 
 def line(tam=43):
     """
-Returns the number of the argument size. Remembering that the size is in pixels.
+        Returns the number of the argument size. Remembering that the size is in pixels.
     """
     return '-' * tam
 
 
-def main_menu(opc):
+def main_menu(opc:list[str]) -> int:
     """
-A main little boy ready.
-   opc = options in LIST.
-There is no need for the exit option, the code does it automatically.
+        A main little boy ready.
+
+        :param opc: options.
+
+        There is no need for the exit option, the code does it automatically.
     """
     c = 1
     e = 'Exit the program.'
