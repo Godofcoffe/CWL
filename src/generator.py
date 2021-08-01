@@ -89,21 +89,22 @@ def main(archive: str, **kwargs):
     n_possibilites = combination(repeat)
     print(f"Were calculated {color_text('yellow', n_possibilites)} possibilities.")
     print(color_text('white', 'generating ...'))
-    try:
-        print(color_text(color_text("yellow", "Press Ctrl + C to stop the script at any time.")))
-        sleep(3)
-    except KeyboardInterrupt:
-        print("Script stopped by user.")
-    else:
-        with open(archive, "w+") as file:
-            while n_possibilites > 0:
-                for out in generate(kwargs):
-                    possibilities[out] = 0
-                    if possibilities[out] > 1:
+    print(color_text("yellow", "Press Ctrl + C to stop the script at any time."))
+    sleep(3)
+    with open(archive, "w+") as file:
+        while n_possibilites > 0:
+            for out in generate(kwargs) if kwargs else generate():
+                possibilities[out] = 0
+                if possibilities[out] > 1:
+                    try:
                         print(color_text("red", out))
-                        pass
-                    else:
-                        possibilities[out] += 1
-                        n_possibilites -= 1
-                        file.write(out)
+                    except KeyboardInterrupt:
+                        print("Script stopped by user.")
+                else:
+                    possibilities[out] += 1
+                    n_possibilites -= 1
+                    file.write(out)
+                    try:
                         print(color_text("white", out))
+                    except KeyboardInterrupt:
+                        print("Script stopped by user.")
