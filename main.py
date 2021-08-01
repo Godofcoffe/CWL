@@ -2,23 +2,27 @@ from os import path, mkdir
 from time import sleep
 from colorama import init
 from src.generator import main
-from src.interface.menu import *
+from src.interface.menu import color_text, main_menu
 from requests import get
 from re import findall
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 def choose(valid):
     while True:
-        entry = str(input(valid)).strip().lower()[0]
-        if entry == 'y':
-            return True
-        elif entry == 'n':
-            return False
-        else:
-            print(color_text('yellow', 'Choose between the two options!'))
+        try:
+            entry = str(input(valid)).strip().lower()[0]
+        except IndexError:
             pass
+        else:
+            if entry == 'y':
+                return True
+            elif entry == 'n':
+                return False
+            else:
+                print(color_text('yellow', 'Choose between the two options!'))
+                pass
 
 
 def update():
