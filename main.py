@@ -35,7 +35,7 @@ def update():
         if remote_version != local_version:
             print(color_text('yellow', "Update Available!\n" +
                              f"You are running version {local_version}. Version {remote_version} "
-                             f"is available at https://github.com/Godofcoffe/Butterfly"))
+                             f"is available at https://github.com/Godofcoffe/CWL"))
     except Exception as error:
         print(color_text('red', f"A problem occured while checking for an update: {error}"))
 
@@ -93,6 +93,7 @@ _________  __      __.____
 
                 elif not symbols and not cap_letters and numbers:
                     main(folder + OUT_TXT, numbers=True)
+
                 elif symbols and cap_letters and not numbers:
                     main(folder + OUT_TXT, symbols=True, uppers=True)
                 break
