@@ -1,3 +1,4 @@
+from functools import update_wrapper
 from random import randint, choice
 from src.interface.menu import color_text
 from time import sleep
@@ -34,7 +35,7 @@ def generate(word=None, symbols=False, only_numbers=False, numbers=False, uppers
     :param simb: chooses whether to add symbols.
     :param only_numbers: choose whether there will be only numbers.
     :param cap: choose if there will be capital letters.
-    :param pos: Changes the position of the name parameter.
+    :param pos: changes the position of the name parameter.
 """
 
     letters = (
@@ -90,32 +91,36 @@ def main(archive: str, **kwargs):
     """
         Main function.
     """
-    limit = kwargs.get("limit")
-    word = kwargs.get("word")
-    if limit is None:
-        limit = 8
+    limit = kwargs.setdefault("limit", 8)
+    word = kwargs.setdefault("word", None)
+    symb = kwargs.setdefault("symbols", False)
+    only_n = kwargs.setdefault("only_numbers", False)
+    num = kwargs.setdefault("numbers", False)
+    up = kwargs.setdefault("uppers", False)
+    pos = kwargs.setdefault("position", False)
     if word is not None:
         limit -= len(word)
     repeat = limit
 
     possibilities = {}
     n_possibilites = combination(repeat)
-    print(f"Were calculated {color_text('yellow', n_possibilites)} possibilities.")
+    print(f"Were calculated {color_text('green', n_possibilites)} possibilities.")
     print(color_text('white', 'generating ...'))
     print(color_text("yellow", "Press Ctrl + C to stop the script at any time."))
     sleep(3)
     with open(archive, "w+") as file:
-        while n_possibilites > 0:
-            try:
-                for out in generate(kwargs.items()) if kwargs else generate():
-                    possibilities[out] = 1
-                    if possibilities[out] > 1:
-                        print("\033[K", color_text("red", out), end="\r")
-                    else:
-                        possibilities[out] += 1
+        try:
+            for out in generate(word, symb, only_n, num, up, pos, limit):
+                if n_possibilites == 0:
+                    break
+                else:
+                    if not out in possibilities.keys():
                         n_possibilites -= 1
                         file.write(out)
                         print("\033[K", color_text("white", out), end="\r")
+                    else:
+                        print("\033[K", color_text("red", out), end="\r")
                             
-            except KeyboardInterrupt:
-                print("Script stopped by user.")
+                            
+        except KeyboardInterrupt:
+            print("Script stopped by user.")
