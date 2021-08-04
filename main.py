@@ -59,8 +59,8 @@ _________  __      __.____
  \______  / \__/\  / |_______ \
         \/       \/          \/
 """))
-    opc = main_menu(['Standard', 'Wifi'])
     update()
+    opc = main_menu(['Standard', 'Wifi'])
     # A opção padrão pode ser usada para força bruta em contas que usam apps de geração de senha
 
     # A opção wifi se aplica a senhas de segurança baixa,
@@ -96,6 +96,9 @@ _________  __      __.____
 
                 elif symbols and cap_letters and not numbers:
                     main(folder + OUT_TXT, symbols=True, uppers=True)
+                
+                elif symbols and not cap_letters and numbers:
+                    main(folder + OUT_TXT, symbols=True, numbers=True)
                 break
             else:
                 break
