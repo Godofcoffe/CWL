@@ -92,14 +92,6 @@ def main(archive: str, **kwargs):
         Main function.
     """
     limit = kwargs.setdefault("limit", 8)
-    word = kwargs.setdefault("word", None)
-    symb = kwargs.setdefault("symbols", False)
-    only_n = kwargs.setdefault("only_numbers", False)
-    num = kwargs.setdefault("numbers", False)
-    up = kwargs.setdefault("uppers", False)
-    pos = kwargs.setdefault("position", False)
-    if word is not None:
-        limit -= len(word)
     repeat = limit
 
     possibilities = {}
@@ -110,7 +102,7 @@ def main(archive: str, **kwargs):
     sleep(3)
     with open(archive, "w+") as file:
         try:
-            for out in generate(word, symb, only_n, num, up, pos, limit):
+            for out in generate(**kwargs):
                 if n_possibilites == 0:
                     break
                 else:
